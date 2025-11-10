@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Appointment {
     private String appointmentId;
@@ -10,7 +11,9 @@ public class Appointment {
     private String reason;
     private String notes;
 
-    public Appointment(String appointmentId, String patientId, String doctorId, LocalDate appointmentDate, String appointmentTime, String status, String reason, String notes) {
+    public Appointment(String appointmentId, String patientId, String doctorId,
+                       LocalDate appointmentDate, String appointmentTime,
+                       String status, String reason, String notes) {
         this.appointmentId = appointmentId;
         this.patientId = patientId;
         this.doctorId = doctorId;
@@ -85,6 +88,37 @@ public class Appointment {
         this.notes = notes;
     }
 
+    // ===== Overloaded Methods =====
+    public void addNotes(String notes) {
+        if (this.notes == null || this.notes.isEmpty()) {
+            this.notes = notes;
+        } else {
+            this.notes += " | " + notes;
+        }
+        System.out.println("Note added: " + notes);
+    }
+
+    public void addNotes(String notes, String addedBy) {
+        String entry = notes + " (added by " + addedBy + ")";
+        if (this.notes == null || this.notes.isEmpty()) {
+            this.notes = entry;
+        } else {
+            this.notes += " | " + entry;
+        }
+        System.out.println("Note added by " + addedBy + ": " + notes);
+    }
+
+    public void addNotes(String notes, String addedBy, LocalDateTime timestamp) {
+        String entry = notes + " (added by " + addedBy + " at " + timestamp + ")";
+        if (this.notes == null || this.notes.isEmpty()) {
+            this.notes = entry;
+        } else {
+            this.notes += " | " + entry;
+        }
+        System.out.println("Note added by " + addedBy + " on " + timestamp + ": " + notes);
+    }
+
+    // ===== Existing Behavior =====
     public void reschedule(LocalDate newDate, String newTime) {
         this.appointmentDate = newDate;
         this.appointmentTime = newTime;
@@ -131,6 +165,4 @@ public class Appointment {
                 ", notes='" + notes + '\'' +
                 '}';
     }
-
-
 }
