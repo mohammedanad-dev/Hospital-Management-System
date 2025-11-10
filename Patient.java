@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,7 +11,10 @@ public class Patient extends Person {
     private List<String> medicalRecords;
     private List<String> appointments;
 
-    public Patient(String id, String firstName, String lastName, LocalDate dateOfBirth, String gender, String phoneNumber, String email, String address, String patientId, String bloodGroup, List<String> allergies, String emergencyContact, LocalDate registrationDate, String insuranceId, List<String> medicalRecords, List<String> appointments) {
+    public Patient(String id, String firstName, String lastName, LocalDate dateOfBirth, String gender,
+                   String phoneNumber, String email, String address, String patientId, String bloodGroup,
+                   List<String> allergies, String emergencyContact, LocalDate registrationDate,
+                   String insuranceId, List<String> medicalRecords, List<String> appointments) {
         super(id, firstName, lastName, dateOfBirth, gender, phoneNumber, email, address);
         this.patientId = patientId;
         this.bloodGroup = bloodGroup;
@@ -98,6 +100,25 @@ public class Patient extends Person {
 
     public void updateInsurance(String newInsuranceId) {
         this.insuranceId = newInsuranceId;
+    }
+
+    // ===== Overloaded Methods =====
+    public void updateContact(String phone) {
+        setPhoneNumber(phone);
+        System.out.println("Contact updated: Phone = " + phone);
+    }
+
+    public void updateContact(String phone, String email) {
+        setPhoneNumber(phone);
+        setEmail(email);
+        System.out.println("Contact updated: Phone = " + phone + ", Email = " + email);
+    }
+
+    public void updateContact(String phone, String email, String address) {
+        setPhoneNumber(phone);
+        setEmail(email);
+        setAddress(address);
+        System.out.println("Contact updated: Phone = " + phone + ", Email = " + email + ", Address = " + address);
     }
 
     @Override
