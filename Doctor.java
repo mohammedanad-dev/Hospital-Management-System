@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.List;
 
-public class Doctor extends Person{
+public class Doctor extends Person {
     private String doctorId;
     private String specialization;
     private String qualification;
@@ -11,7 +11,10 @@ public class Doctor extends Person{
     private List<String> availableSlots;
     private List<String> assignedPatients;
 
-    public Doctor(String id, String firstName, String lastName, LocalDate dateOfBirth, String gender, String phoneNumber, String email, String address, String doctorId, String specialization, String qualification, Integer experienceYears, String departmentId, Double consultationFee, List<String> availableSlots, List<String> assignedPatients) {
+    public Doctor(String id, String firstName, String lastName, LocalDate dateOfBirth, String gender,
+                  String phoneNumber, String email, String address, String doctorId, String specialization,
+                  String qualification, Integer experienceYears, String departmentId, Double consultationFee,
+                  List<String> availableSlots, List<String> assignedPatients) {
         super(id, firstName, lastName, dateOfBirth, gender, phoneNumber, email, address);
         this.doctorId = doctorId;
         this.specialization = specialization;
@@ -107,6 +110,37 @@ public class Doctor extends Person{
     public void updateAvailability(List<String> newSlots) {
         this.availableSlots = newSlots;
         System.out.println("Availability updated for Dr. " + getLastName());
+    }
+
+    // ===== Overloaded Methods =====
+    public void updateFee(double fee) {
+        this.consultationFee = fee;
+        System.out.println("Consultation fee updated to: " + fee + " OMR");
+    }
+
+    public void updateFee(double fee, String reason) {
+        this.consultationFee = fee;
+        System.out.println("Consultation fee updated to: " + fee + " OMR (Reason: " + reason + ")");
+    }
+
+    public void addAvailability(String slot) {
+        if (!availableSlots.contains(slot)) {
+            availableSlots.add(slot);
+            System.out.println("Added available slot: " + slot);
+        } else {
+            System.out.println("Slot already exists: " + slot);
+        }
+    }
+
+    public void addAvailability(List<String> slots) {
+        int count = 0;
+        for (String slot : slots) {
+            if (!availableSlots.contains(slot)) {
+                availableSlots.add(slot);
+                count++;
+            }
+        }
+        System.out.println(count + " new slot(s) added to availability.");
     }
 
     @Override
